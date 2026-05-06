@@ -49,10 +49,10 @@ function initCharts() {
                 datasets: [{
                     label: 'Aktivitas User',
                     data: [5, 35, 50, 45, 65, 58, 80, 115, 105, 135],
-                    borderColor: '#F9FF00', // Electric Yellow
-                    backgroundColor: 'rgba(249, 255, 0, 0.1)',
-                    borderWidth: 3,
-                    tension: 0.4,
+                    borderColor: '#000000', // Black
+                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    borderWidth: 2,
+                    tension: 0, // Straight lines for Lo-Fi
                     fill: true
                 }]
             },
@@ -61,7 +61,7 @@ function initCharts() {
                 maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
                 scales: {
-                    y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' } },
+                    y: { beginAtZero: true, grid: { color: 'rgba(0, 0, 0, 0.1)' } },
                     x: { grid: { display: false } }
                 }
             }
@@ -78,13 +78,13 @@ function initCharts() {
                 labels: ['User Cancel', 'Error System'],
                 datasets: [{
                     data: [88, 55],
-                    backgroundColor: '#FF3B30',
-                    borderRadius: 5
+                    backgroundColor: '#666666',
+                    borderRadius: 0
                 }]
             },
             options: {
                 plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, max: 100 } }
+                scales: { y: { beginAtZero: true, max: 100, grid: { color: 'rgba(0, 0, 0, 0.1)' } } }
             }
         });
     }
@@ -99,13 +99,13 @@ function initCharts() {
                 labels: ['User Cancel', 'Error System'],
                 datasets: [{
                     data: [92, 18], 
-                    backgroundColor: '#F9FF00',
-                    borderRadius: 5
+                    backgroundColor: '#333333',
+                    borderRadius: 0
                 }]
             },
             options: {
                 plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, max: 100 } }
+                scales: { y: { beginAtZero: true, max: 100, grid: { color: 'rgba(0, 0, 0, 0.1)' } } }
             }
         });
     }
