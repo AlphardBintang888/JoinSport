@@ -506,13 +506,13 @@ function renderLogs(filterStatus = "Semua") {
     }
     
     filteredLogs.forEach(log => {
-        let statusHtml = `<span class="badge ${log.statusClass}" style="background-color: var(--primary); color: #1A1C2E;">${log.status}</span>`;
+        let statusHtml = `<span class="badge ${log.statusClass}" style="background-color: var(--primary); color: #000000;">${log.status}</span>`;
         if (log.status === "Error") {
-            statusHtml = `<span class="badge" style="background-color: var(--danger); color: white;">${log.status}</span>`;
+            statusHtml = `<span class="badge" style="background-color: var(--danger); color: #000000;">${log.status}</span>`;
         } else if (log.status === "Warning") {
-            statusHtml = `<span class="badge" style="background-color: var(--warning); color: #1A1C2E;">${log.status}</span>`;
+            statusHtml = `<span class="badge" style="background-color: var(--warning); color: #000000;">${log.status}</span>`;
         } else if (log.status === "Berhasil") {
-            statusHtml = `<span class="badge" style="background-color: var(--primary); color: #1A1C2E;">${log.status}</span>`;
+            statusHtml = `<span class="badge" style="background-color: var(--primary); color: #000000;">${log.status}</span>`;
         }
 
         logList.innerHTML += `
