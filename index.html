@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin JoinSport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="profile-section">
+            <div class="profile-icon">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <h3>Alphard</h3>
+            <span class="profile-role">Admin JoinSport</span>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item active" onclick="showPage('dashboard', event)">
+                <i class="fa-solid fa-house"></i> Dashboard
+            </li>
+            <li class="nav-item" onclick="showPage('log-aktivitas', event)">
+                <i class="fa-solid fa-list-check"></i> Log Aktivitas
+            </li>
+            <li class="nav-item" onclick="showPage('transaksi', event)">
+                <i class="fa-solid fa-credit-card"></i> Transaksi
+            </li>
+            <li class="nav-item" onclick="showPage('manajemen-event', event)">
+                <i class="fa-solid fa-calendar-days"></i> Manajemen Event
+            </li>
+            <li class="nav-item" onclick="showPage('analitik', event)">
+                <i class="fa-solid fa-chart-line"></i> Analitik
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+
+        <section id="dashboard" class="page-section active">
+            <div class="page-header">
+                <h2>DASHBOARD UTAMA</h2>
+                <div class="system-health">
+                    <span>System Health <span class="status-good"><i class="fa-solid fa-heart-pulse"></i>
+                            Baik</span></span>
+                </div>
+            </div>
+
+            <div class="stats-grid" style="grid-template-columns: 1fr;">
+                <div class="stat-card">
+                    <div>
+                        <h4 class="text-muted">Transaksi Pending</h4>
+                        <h2>Sedang <span style="font-size: 0.5em; color: var(--text-muted);">(42)</span></h2>
+                    </div>
+                    <i class="fa-regular fa-clock icon-orange"></i>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Real-time User Activity</h3>
+                <div class="chart-container">
+                    <canvas id="dashboardChart"></canvas>
+                </div>
+            </div>
+
+            <div class="page-header" style="margin-top: 30px;">
+                <h2>Event Sedang Berjalan</h2>
+            </div>
+            <div class="events-grid" id="dashEventsContainer" style="margin-bottom: 30px;">
+                <!-- Event berjalan akan diinjeksi via JS -->
+            </div>
+
+            <div class="mini-stat-bar">
+                <div class="mini-stat-info">
+                    <i class="fa-solid fa-users icon-blue"></i>
+                    <span><strong>Pengguna Online:</strong> 1,245 (Tinggi)</span>
+                </div>
+                <span class="status-good">Status Stabil</span>
+            </div>
+        </section>
+
+        <section id="log-aktivitas" class="page-section">
+            <div class="page-header">
+                <h2>HALAMAN LOG AKTIVITAS</h2>
+            </div>
+            <div class="card">
+                <div class="filter-row">
+                    <div>
+                        Filter Status:
+                        <select class="custom-select" id="logStatusFilter">
+                            <option value="Semua">Semua</option>
+                            <option value="Berhasil">Berhasil</option>
+                            <option value="Warning">Warning</option>
+                            <option value="Error">Error</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="btn btn-muted" onclick="filterLogs()"><i class="fa-solid fa-filter"></i>
+                            Filter</button>
+                        <button class="btn btn-danger" onclick="clearLogs()"
+                            style="background:var(--danger);color:white;margin-left:10px;"><i
+                                class="fa-solid fa-trash"></i> Bersihkan Log</button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Waktu</th>
+                            <th>Pengguna</th>
+                            <th>Aktivitas / Aksi</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activityLogList">
+                        <!-- Injeksi JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Catatan Investigasi Admin</h3>
+                <textarea class="textarea-custom"
+                    placeholder="Ketik catatan di sini...">User dirugikan akibat masalah pembayaran sistem</textarea>
+            </div>
+        </section>
+
+        <section id="transaksi" class="page-section">
+            <div class="page-header">
+                <h2>Histori Transaksi Berjalan</h2>
+            </div>
+            <div class="card">
+                <table style="margin-bottom: 20px;">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Nama Event (Cabor)</th>
+                            <th>Peserta (Lunas)</th>
+                            <th>Status Pembayaran</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionHistoryList">
+                        <!-- Injeksi JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="page-header" style="margin-top: 30px;">
+                <h2>Permintaan Refund Dana (Deposit)</h2>
+            </div>
+            <div id="refundRequestsContainer">
+                <!-- Injeksi JS -->
+            </div>
+        </section>
+
+        <section id="analitik" class="page-section">
+            <div class="page-header">
+                <h2>Analitik dan Dampak Sistem Deposit</h2>
+            </div>
+            <div class="card impact-summary">
+                <div><strong>Pembatalan:</strong> x:N, 80.000</div>
+                <div class="health-indicator">
+                    System Health
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="charts-row">
+                <div class="card">
+                    <h4 class="chart-title">Sebelum Sistem Deposit</h4>
+                    <canvas id="chartSebelum"></canvas>
+                </div>
+                <div class="card">
+                    <h4 class="chart-title">Setelah Sistem Deposit</h4>
+                    <canvas id="chartSesudah"></canvas>
+                </div>
+            </div>
+        </section>
+
+        </section>
+
+        <section id="manajemen-event" class="page-section">
+            <div class="page-header">
+                <h2>Manajemen Event Olahraga</h2>
+                <button class="btn btn-primary btn-large" onclick="openEventModal()"><i class="fa-solid fa-plus"></i>
+                    Tambah Event Baru</button>
+            </div>
+
+            <div class="card bg-accent-light">
+                <h3><i class="fa-solid fa-lightbulb" style="color: var(--warning);"></i> Smart Insight: Prediksi
+                    Partisipasi</h3>
+                <p>Berdasarkan aktivitas pengguna secara real-time, waktu terbaik untuk mengadakan event adalah:
+                    <strong>Akhir Pekan jam 16:00 - 18:00</strong>.</p>
+            </div>
+
+            <div class="filter-row">
+                <div>
+                    <strong>Filter Lokasi:</strong>
+                    <select class="custom-select" id="locationFilter" onchange="filterEvents()">
+                        <option value="Semua">Semua Wilayah</option>
+                        <option value="Jakarta Selatan">Jakarta Selatan</option>
+                        <option value="Jakarta Pusat">Jakarta Pusat</option>
+                        <option value="Jakarta Barat">Jakarta Barat</option>
+                        <option value="Jakarta Timur">Jakarta Timur</option>
+                        <option value="Jakarta Utara">Jakarta Utara</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="events-grid" id="eventsContainer">
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Create Event -->
+    <div id="eventModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Buat Event Olahraga Baru</h3>
+                <button class="btn-close" onclick="closeEventModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="createEventForm">
+                    <div class="form-group">
+                        <label>Nama Event</label>
+                        <input type="text" id="eventName" class="form-control" required
+                            placeholder="Contoh: Fun Football Jakarta">
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis Olahraga</label>
+                        <select id="eventSport" class="form-control" required>
+                            <option value="Sepak Bola">Sepak Bola</option>
+                            <option value="Mini Soccer">Mini Soccer</option>
+                            <option value="Futsal">Futsal</option>
+                            <option value="Basket">Basket</option>
+                            <option value="Badminton">Badminton</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi Acara</label>
+                        <textarea id="eventDesc" class="form-control" required
+                            placeholder="Deskripsi singkat..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>Tanggal</label>
+                            <input type="date" id="eventDate" class="form-control" required>
+                        </div>
+                        <div class="form-group half">
+                            <label>Jam Mulai</label>
+                            <input type="time" id="eventTime" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Lokasi (Pilih Wilayah)</label>
+                        <select id="eventLocation" class="form-control" required>
+                            <option value="Jakarta Selatan">Jakarta Selatan</option>
+                            <option value="Jakarta Pusat">Jakarta Pusat</option>
+                            <option value="Jakarta Barat">Jakarta Barat</option>
+                            <option value="Jakarta Timur">Jakarta Timur</option>
+                            <option value="Jakarta Utara">Jakarta Utara</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>Kapasitas (Slot)</label>
+                            <input type="number" id="eventCapacity" class="form-control" required min="2">
+                        </div>
+                        <div class="form-group half">
+                            <label>Harga Pendaftaran (Rp)</label>
+                            <input type="number" id="eventPrice" class="form-control" required min="0"
+                                placeholder="0 jika gratis">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Poster Event (Opsional)</label>
+                        <input type="file" id="eventPoster" class="form-control" accept="image/*">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-muted" onclick="closeEventModal()">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Peserta -->
+    <div id="participantModal" class="modal-overlay">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>Daftar Peserta - <span id="participantEventName"></span></h3>
+                <button class="btn-close" onclick="closeParticipantModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Peserta</th>
+                            <th>Status Pembayaran</th>
+                        </tr>
+                    </thead>
+                    <tbody id="participantList">
+                        <!-- Peserta akan diinjeksi via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal On-Site Order -->
+    <div id="onsiteOrderModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Pendaftaran On-Site - <span id="onsiteEventName"></span></h3>
+                <button class="btn-close" onclick="closeOnsiteModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="onsiteOrderForm">
+                    <input type="hidden" id="onsiteEventId">
+                    <div class="form-group">
+                        <label>Nama Peserta</label>
+                        <input type="text" id="onsiteName" class="form-control" required
+                            placeholder="Contoh: Budi Santoso">
+                    </div>
+                    <div class="form-group">
+                        <label>Status Pembayaran</label>
+                        <select id="onsiteStatus" class="form-control" required>
+                            <option value="Lunas">Lunas (Tunai / Transfer On-site)</option>
+                            <option value="Pending">Pending (Bayar Nanti)</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-muted" onclick="closeOnsiteModal()">Batal</button>
+                        <button type="submit" class="btn btn-primary">Tambah Peserta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
