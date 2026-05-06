@@ -39,80 +39,78 @@ function showPage(pageId, event) {
  */
 function initCharts() {
     // --- 1. Dashboard Line Chart ---
-    const ctxDash = document.getElementById('dashboardChart').getContext('2d');
-    new Chart(ctxDash, {
-        type: 'line',
-        data: {
-            labels: ['0', '10', '20', '30', '40', '50', '60', '70', '80'],
-            datasets: [{
-                label: 'Aktivitas User',
-                data: [5, 35, 50, 45, 65, 58, 80, 115, 105, 135],
-                borderColor: '#5C93C4',
-                backgroundColor: 'rgba(92, 147, 196, 0.1)',
-                borderWidth: 3,
-                tension: 0.4,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { 
-                legend: { display: false },
-                tooltip: {
-                    enabled: true,
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
-                        label: function(context) {
-                            return ` ${context.parsed.y} Pengguna Aktif`;
-                        }
-                    }
-                }
+    const dashElem = document.getElementById('dashboardChart');
+    if(dashElem) {
+        const ctxDash = dashElem.getContext('2d');
+        new Chart(ctxDash, {
+            type: 'line',
+            data: {
+                labels: ['0', '10', '20', '30', '40', '50', '60', '70', '80'],
+                datasets: [{
+                    label: 'Aktivitas User',
+                    data: [5, 35, 50, 45, 65, 58, 80, 115, 105, 135],
+                    borderColor: '#F9FF00', // Electric Yellow
+                    backgroundColor: 'rgba(249, 255, 0, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true
+                }]
             },
-            scales: {
-                y: { beginAtZero: true, grid: { color: '#f0f0f0' } },
-                x: { grid: { display: false } }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' } },
+                    x: { grid: { display: false } }
+                }
             }
-        }
-    });
+        });
+    }
 
     // --- 2. Chart Analitik: Sebelum Deposit ---
-    const ctxPrev = document.getElementById('chartSebelum').getContext('2d');
-    new Chart(ctxPrev, {
-        type: 'bar',
-        data: {
-            labels: ['User Cancel', 'Error System'],
-            datasets: [{
-                data: [88, 55],
-                backgroundColor: '#E74C3C',
-                borderRadius: 5
-            }]
-        },
-        options: {
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true, max: 100 } }
-        }
-    });
+    const prevElem = document.getElementById('chartSebelum');
+    if(prevElem) {
+        const ctxPrev = prevElem.getContext('2d');
+        new Chart(ctxPrev, {
+            type: 'bar',
+            data: {
+                labels: ['User Cancel', 'Error System'],
+                datasets: [{
+                    data: [88, 55],
+                    backgroundColor: '#FF3B30',
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, max: 100 } }
+            }
+        });
+    }
 
     // --- 3. Chart Analitik: Sesudah Deposit ---
-    const ctxAfter = document.getElementById('chartSesudah').getContext('2d');
-    new Chart(ctxAfter, {
-        type: 'bar',
-        data: {
-            labels: ['User Cancel', 'Error System'],
-            datasets: [{
-                data: [92, 18], // Menunjukkan penurunan Error yang signifikan
-                backgroundColor: '#48BCA2',
-                borderRadius: 5
-            }]
-        },
-        options: {
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true, max: 100 } }
-        }
-    });
+    const afterElem = document.getElementById('chartSesudah');
+    if(afterElem) {
+        const ctxAfter = afterElem.getContext('2d');
+        new Chart(ctxAfter, {
+            type: 'bar',
+            data: {
+                labels: ['User Cancel', 'Error System'],
+                datasets: [{
+                    data: [92, 18], 
+                    backgroundColor: '#F9FF00',
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, max: 100 } }
+            }
+        });
+    }
 }
+
 
 // --- Event Management Logic ---
 

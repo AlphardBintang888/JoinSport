@@ -21,7 +21,7 @@
             <span class="profile-role">Admin JoinSport</span>
         </div>
         <ul class="nav-menu">
-            <a href="index.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-dashboard" class="nav-item active">
+            <a href="index.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-dashboard">
                 <i class="fa-solid fa-house"></i> Dashboard
             </li></a>
             <a href="log-aktivitas.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-log">
@@ -33,7 +33,7 @@
             <a href="manajemen-event.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-manajemen">
                 <i class="fa-solid fa-calendar-days"></i> Manajemen Event
             </li></a>
-            <a href="analitik.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-analitik">
+            <a href="analitik.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-analitik" class="nav-item active">
                 <i class="fa-solid fa-chart-line"></i> Analitik
             </li></a>
         </ul>
@@ -41,45 +41,28 @@
 
     <main class="main-content">
 
-        <section id="dashboard" class="page-section active">
+        <section id="analitik" class="page-section active">
             <div class="page-header">
-                <h2>DASHBOARD UTAMA</h2>
-                <div class="system-health">
-                    <span>System Health <span class="status-good"><i class="fa-solid fa-heart-pulse"></i>
-                            Baik</span></span>
-                </div>
+                <h2>Analitik dan Dampak Sistem Deposit</h2>
             </div>
-
-            <div class="stats-grid" style="grid-template-columns: 1fr;">
-                <div class="stat-card">
-                    <div>
-                        <h4 class="text-muted">Transaksi Pending</h4>
-                        <h2>Sedang <span style="font-size: 0.5em; color: var(--text-muted);">(42)</span></h2>
+            <div class="card impact-summary">
+                <div><strong>Pembatalan:</strong> x:N, 80.000</div>
+                <div class="health-indicator">
+                    System Health
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
                     </div>
-                    <i class="fa-regular fa-clock icon-orange"></i>
                 </div>
             </div>
-
-            <div class="card">
-                <h3>Real-time User Activity</h3>
-                <div class="chart-container">
-                    <canvas id="dashboardChart"></canvas>
+            <div class="charts-row">
+                <div class="card">
+                    <h4 class="chart-title">Sebelum Sistem Deposit</h4>
+                    <canvas id="chartSebelum"></canvas>
                 </div>
-            </div>
-
-            <div class="page-header" style="margin-top: 30px;">
-                <h2>Event Sedang Berjalan</h2>
-            </div>
-            <div class="events-grid" id="dashEventsContainer" style="margin-bottom: 30px;">
-                <!-- Event berjalan akan diinjeksi via JS -->
-            </div>
-
-            <div class="mini-stat-bar">
-                <div class="mini-stat-info">
-                    <i class="fa-solid fa-users icon-blue"></i>
-                    <span><strong>Pengguna Online:</strong> 1,245 (Tinggi)</span>
+                <div class="card">
+                    <h4 class="chart-title">Setelah Sistem Deposit</h4>
+                    <canvas id="chartSesudah"></canvas>
                 </div>
-                <span class="status-good">Status Stabil</span>
             </div>
         </section>
         

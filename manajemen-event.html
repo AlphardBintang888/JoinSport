@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin JoinSport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="profile-section">
+            <div class="profile-icon">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <h3>Alphard</h3>
+            <span class="profile-role">Admin JoinSport</span>
+        </div>
+        <ul class="nav-menu">
+            <a href="index.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-dashboard">
+                <i class="fa-solid fa-house"></i> Dashboard
+            </li></a>
+            <a href="log-aktivitas.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-log">
+                <i class="fa-solid fa-list-check"></i> Log Aktivitas
+            </li></a>
+            <a href="transaksi.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-transaksi">
+                <i class="fa-solid fa-credit-card"></i> Transaksi
+            </li></a>
+            <a href="manajemen-event.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-manajemen" class="nav-item active">
+                <i class="fa-solid fa-calendar-days"></i> Manajemen Event
+            </li></a>
+            <a href="analitik.html" style="text-decoration:none; color:inherit;"><li class="nav-item" id="nav-analitik">
+                <i class="fa-solid fa-chart-line"></i> Analitik
+            </li></a>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+
+        <section id="manajemen-event" class="page-section active">
+            <div class="page-header">
+                <h2>Manajemen Event Olahraga</h2>
+                <button class="btn btn-primary btn-large" onclick="openEventModal()"><i class="fa-solid fa-plus"></i>
+                    Tambah Event Baru</button>
+            </div>
+
+            <div class="card bg-accent-light">
+                <h3><i class="fa-solid fa-lightbulb" style="color: var(--warning);"></i> Smart Insight: Prediksi
+                    Partisipasi</h3>
+                <p>Berdasarkan aktivitas pengguna secara real-time, waktu terbaik untuk mengadakan event adalah:
+                    <strong>Akhir Pekan jam 16:00 - 18:00</strong>.</p>
+            </div>
+
+            <div class="filter-row">
+                <div>
+                    <strong>Filter Lokasi:</strong>
+                    <select class="custom-select" id="locationFilter" onchange="filterEvents()">
+                        <option value="Semua">Semua Wilayah</option>
+                        <option value="Jakarta Selatan">Jakarta Selatan</option>
+                        <option value="Jakarta Pusat">Jakarta Pusat</option>
+                        <option value="Jakarta Barat">Jakarta Barat</option>
+                        <option value="Jakarta Timur">Jakarta Timur</option>
+                        <option value="Jakarta Utara">Jakarta Utara</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="events-grid" id="eventsContainer">
+            </div>
+        </section>
+        
